@@ -27,6 +27,24 @@ MySQL server uses TCP port 3306 by default, so had to create it as a new entry i
 
 Then run the security script to secure mysql on the server and follow all the prompts- `sudo mysql_secure_installation`       
 
-        ![server_inbound](./images/server_inbound_rule.jpg) 
+![sudo_secure](./images/sudo_mysql_secure.jpg)          
 
+Then sudo into my sql instance using the `sudo mysql` command and it will assume I am root and hence no password requested. 
+
+Create a user 'remote_user, create a table 'test_db' and grant privileges to table.             
+![sudo_secure](./images/grant_privi.jpg)                
+
+To configure MySQL server to allow connections from remote hosts.       
+`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf` and replace  ‘127.0.0.1’ to ‘0.0.0.0’ like this:           
+![sudo_secure](./images/bind_address.jpg)               
+
+
+Testing a remote connection from mysql client:          
+![remote_connect](./images/remote_user_connect.jpg)             
+
+To check that you have successfully connected to a remote MySQL server and can perform SQL queries: run the command `Show databases;`           
+
+![sudo_secure](./images/test_connection_sucess.jpg)             
+
+The image above indicates a successful connection and that you can see the database tables from a remote connection from the client server.
 
